@@ -22,6 +22,8 @@
         <input id="userInput" type="text">
 
         <button id="setMessageButton">Set secret message</button>
+
+        <button id="getMessageButton">Get secret message</button>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -77,9 +79,45 @@
 
         $("#setMessageButton").click(function () {
             message = $("#userInput").val()
-            var output = myMessage.methods.setMessage(message).call(); //(error, result) => {message = result});
             console.log($("#userInput").val())
-            console.log(output);
+            myMessage.methods.setMessage(message).send(
+                {
+                    from: '0x7E0b55C703FbF6b075258EB9CAF8F9fCA611F656'
+                }).then(
+                function(error,result){
+                    console.log(error, result)
+                }
+            ); //(error, result) => {message = result});
+            
+            //console.log(output);
+        });
+
+        $("#getMessageButton").click(function () {
+            // var output = myMessage.methods.getMessage().call(); 
+            // // (error, result) => {
+            // //     if (error !== undefined){
+            // //         console.log(error)
+            // //     }else{
+
+            // //     console.log(result)
+            // //     }
+            // // });
+            // //console.log($("#userInput").val())
+            // console.log(output);
+
+            // myMessage.methods.getMessage().call(
+            //     {
+            //         from: '0x7E0b55C703FbF6b075258EB9CAF8F9fCA611F656'
+            //     }).then(
+            //     function(error,result){
+            //         console.log(error, result)
+            //     }
+            // ); //(error, result) => {message = result});
+
+            const val =  myMessage.methods.getMessage().call({
+                    from: '0x7E0b55C703FbF6b075258EB9CAF8F9fCA611F656'
+                });
+            console.log(val);
         });
 
     </script>
