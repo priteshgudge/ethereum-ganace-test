@@ -32,14 +32,14 @@
         if (typeof web3 !== 'undefined') {
             web3 = new Web3(web3.currentProvider);
         } else {
-            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
         }
 
         // Set a default account
         web3.eth.defaultAccount = web3.eth.accounts[0];
 
         // Get the contract address
-        var RemixContract = web3.eth.contract([
+        var RemixContract = new web3.eth.Contract([
 	{
 		"constant": false,
 		"inputs": [
@@ -68,17 +68,18 @@
 		"stateMutability": "view",
 		"type": "function"
 	}
-]);
+],'0xDA9Ea880B30e8B1DAD95462880458Fc8b55a5abe');
 
         // Get the contract abi
-        var myMessage = RemixContract.at('0xDA9Ea880B30e8B1DAD95462880458Fc8b55a5abe');
-
+        //var myMessage = RemixContract.at('0xDA9Ea880B30e8B1DAD95462880458Fc8b55a5abe');
+        var myMessage = RemixContract;
         console.log(myMessage);
 
         $("#setMessageButton").click(function () {
             message = $("#userInput").val()
-            myMessage.setMessage(message, (error, result) => {message = result});
+            var output = myMessage.methods.setMessage(message).call(); //(error, result) => {message = result});
             console.log($("#userInput").val())
+            console.log(output);
         });
 
     </script>

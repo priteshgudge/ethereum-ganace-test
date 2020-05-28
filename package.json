@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "ethereumjs-testrpc": "^6.0.3",
-    "web3": "^0.20.1"
+    "ethereumjs-tx": "^2.1.2",
+    "web3": "^0.20.7"
   }
 }
